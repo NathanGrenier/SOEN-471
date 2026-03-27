@@ -1,4 +1,9 @@
 # Assignment 2
+
+Analyses and results can be found in the [following jupyter notebook](analysis.ipynb).
+
+All assignment reference data can be found in the `/data` directory.
+
 ## Development Setup
 
 We use **[uv](https://docs.astral.sh/uv/)** for dependency management.
@@ -31,25 +36,16 @@ source .venv/bin/activate
 .venv\Scripts\activate
 ```
 
-*Alternatively, you can run commands without activating by prefixing them with `uv run` (e.g., `uv run jupyter lab`).*
-
 ### Managing Packages
 
 **Add a package:**
 ```bash
 uv add <package_name>
-# Example: uv add scipy
 ```
 
 **Remove a package:**
 ```bash
 uv remove <package_name>
-```
-
-**Sync with team changes:**
-If someone else pushed changes to `uv.lock`, update your local environment:
-```bash
-uv sync
 ```
 
 ### Formatting & Linting
