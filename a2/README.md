@@ -1,8 +1,11 @@
 # Assignment 2
 
-Analyses and results can be found in the [following jupyter notebook](analysis.ipynb).
-
-All assignment reference data can be found in the `/data` directory.
+## Project Structure
+- The project code, analyses, and results can be found in the [analysis jupyter notebook](analysis.ipynb).
+- All assignment reference data can be found in the `/data` directory.
+- All assignment results can be found in the `results/` directory. This contains:
+  - The exported result tables (.csv)
+  - The exported graphs (.png)
 
 ## Development Setup
 
@@ -65,6 +68,8 @@ uv run ruff format .
 > **VS Code Tip:** Install the `Ruff` extension. It will use the settings in `pyproject.toml` to format your code automatically on save.
 
 ## Project Data
+
+The following are examples of the data used in the project.
 
 `data/ecommerce_user_data.csv`:
 ```csv
