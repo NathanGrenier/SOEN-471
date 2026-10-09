@@ -1,103 +1,80 @@
-# Assignment 2
+# E-Commerce Recommender System & Pattern Mining
+
+## Overview
+This project builds a data-driven product recommendation engine and conducts market basket analysis for an e-commerce platform. The goal is to increase customer lifetime value by serving personalized product suggestions and discovering natural product bundles.
+
+The project is broken into two main analytical approaches:
+1. **User-Based Collaborative Filtering:** A recommendation engine that generates personalized product lists by finding "similar" users based on their rating histories using Cosine Similarity. The model was evaluated using a rigorous 80/20 train-test split, tracking Cross-Validated Precision, Recall, and Catalog Coverage.
+2. **Association Rule Mining:** Using the Apriori algorithm to discover frequent itemsets (products commonly bought together). By evaluating support, confidence, and high *lift* values, the system identifies strong dependencies between specific items for targeted cross-selling.
+
+## Technical Highlights
+* **Matrix Operations:** Built and optimized highly sparse user-item matrices for similarity computations.
+* **Machine Learning Context:** Evaluated the cold-start and sparsity tradeoffs inherent to collaborative filtering.
+* **Pattern Mining:** Processed large transaction datasets into association rules to extract interpretable, actionable business logic (e.g., discovering multi-item functional bundles).
+
+## 📓 Notebook of Interest
+* [**End-to-End Analysis & Modeling**](./analysis.ipynb): A comprehensive notebook containing the full pipeline:
+  * **ETL & Preprocessing:** Building and optimizing highly sparse user-item matrices from raw transaction logs.
+  * **Collaborative Filtering:** Implementing Cosine Similarity to generate user-based product recommendations, complete with a train/test split evaluation for precision, recall, and catalog coverage.
+  * **Pattern Mining:** Applying the Apriori algorithm to extract association rules (support, confidence, lift) to discover high-value, multi-product bundles.
 
 ## Project Structure
-- The project code, analyses, and results can be found in the [analysis jupyter notebook](analysis.ipynb).
-- All assignment reference data can be found in the `/data` directory.
-- All assignment results can be found in the `results/` directory. This contains:
-  - The exported result tables (.csv)
-  - The exported graphs (.png)
+- Core logic and evaluations are housed in `analysis.py` (and the corresponding `analysis.ipynb` notebook).
+- Reference datasets are in `/data`.
+- Outputs (Result tables `.csv` and visualization `.png` files) generate to the `results/` directory.
 
 ## Development Setup
 
 We use **[uv](https://docs.astral.sh/uv/)** for dependency management.
 
 ### Install uv
-
-**MacOS / Linux:** [Follow this Guide](https://docs.astral.sh/uv/getting-started/installation/#__tabbed_1_1)
-
-**Windows:** [Follow this Guide](https://docs.astral.sh/uv/getting-started/installation/#__tabbed_1_2)
+* **MacOS / Linux:** [Follow this Guide](https://docs.astral.sh/uv/getting-started/installation/#__tabbed_1_1)
+* **Windows:** [Follow this Guide](https://docs.astral.sh/uv/getting-started/installation/#__tabbed_1_2)
 
 ### Create & Sync Environment
-
 To create your local virtual environment (`.venv`) and install all dependencies locked in `uv.lock`:
-
 ```bash
 uv sync
 ```
 
 ### Enter the Environment
-
 You can activate the environment in your terminal:
 
-**MacOS / Linux:**
+MacOS / Linux:
 ```bash
 source .venv/bin/activate
 ```
 
-**Windows:**
+Windows:
 ```powershell
 .venv\Scripts\activate
 ```
+`(Alternatively, you can run commands without activating by prefixing them with uv run, e.g., uv run jupyter lab)`
 
 ### Managing Packages
-
-**Add a package:**
-```bash
-uv add <package_name>
-```
-
-**Remove a package:**
-```bash
-uv remove <package_name>
-```
+- Add a package: `uv add <package_name>`
+- Remove a package: `uv remove <package_name>`
+- Sync with team changes: `uv sync`
 
 ### Formatting & Linting
+We use Ruff for linting and formatting.   
 
-We use **Ruff** for linting and formatting.
+- Check for errors (Lint): `uv run ruff check .`
+- Auto-format code: `uv run ruff format .`
 
-**Check for errors (Lint):**
-```bash
-uv run ruff check .
+## Project Data Samples
+User Interactions (`data/ecommerce_user_data.csv`):
 ```
-
-**Auto-format code:**
-```bash
-uv run ruff format .
-```
-
-> **VS Code Tip:** Install the `Ruff` extension. It will use the settings in `pyproject.toml` to format your code automatically on save.
-
-## Project Data
-
-The following are examples of the data used in the project.
-
-`data/ecommerce_user_data.csv`:
-```csv
 UserID,ProductID,Rating,Timestamp,Category
 U000,P0009,5,2024-09-08,Books
 U000,P0020,1,2024-09-02,Home
 U000,P0012,4,2024-10-18,Books
-U000,P0013,1,2024-09-18,Clothing
-U000,P0070,4,2024-09-16,Toys
-U000,P0014,1,2024-09-15,Home
-U000,P0048,5,2024-09-09,Toys
-U000,P0079,4,2024-10-18,Electronics
-U000,P0042,3,2024-09-07,Toys
-U000,P0050,1,2024-10-14,Clothing
 ```
 
-`data/product_details.csv`:
-```csv
+Product Catalog (`data/product_details.csv`):
+```
 ProductID,ProductName,Category
 P0000,Toys Item 0,Clothing
 P0001,Clothing Item 1,Electronics
 P0002,Books Item 2,Electronics
-P0003,Clothing Item 3,Electronics
-P0004,Clothing Item 4,Electronics
-P0005,Home Item 5,Toys
-P0006,Books Item 6,Books
-P0007,Books Item 7,Books
-P0008,Books Item 8,Electronics
-P0009,Clothing Item 9,Books
-P0010,Toys Item 10,Books
 ```
